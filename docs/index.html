@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSID Tracker — Road Trip Visualizer</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="sidebar">
+    <div id="header">
+      <h1>&#9632; SSID Tracker</h1>
+      <p class="subtitle">Road Trip WiFi Logger</p>
+    </div>
+
+    <div class="card" id="uploadCard">
+      <label for="csvFile">Load CSV downloaded from device:</label>
+      <input type="file" id="csvFile" accept=".csv" multiple>
+      <p class="hint">Supports multiple files (multi-day trips)</p>
+    </div>
+
+    <div class="card hidden" id="statsCard">
+      <div class="stat-row"><span>Locations</span>    <span id="statLocations">—</span></div>
+      <div class="stat-row"><span>Total SSIDs</span>  <span id="statTotal">—</span></div>
+      <div class="stat-row"><span>Unique SSIDs</span> <span id="statUnique">—</span></div>
+      <div class="stat-row"><span>Date range</span>   <span id="statDates">—</span></div>
+      <div class="stat-row"><span>Distance</span>     <span id="statDist">—</span></div>
+      <div class="stat-row"><span>Avg battery</span>  <span id="statBattery">—</span></div>
+    </div>
+
+    <div class="card hidden" id="filterCard">
+      <div id="filterHeader">
+        <span class="section-label">SSIDs <span id="ssidCountBadge" class="badge">0</span></span>
+        <button id="resetFilterBtn" class="btn-small">Show all</button>
+      </div>
+      <input type="text" id="filterInput" placeholder="Search SSID name..." autocomplete="off" spellcheck="false">
+      <div id="ssidList"></div>
+    </div>
+
+    <div class="legend card hidden" id="legendCard">
+      <span class="section-label">SSIDs per location</span>
+      <div class="legend-items">
+        <span class="dot" style="background:#555"></span><span>0</span>
+        <span class="dot" style="background:#0af"></span><span>1–4</span>
+        <span class="dot" style="background:#0f0"></span><span>5–14</span>
+        <span class="dot" style="background:#ff0"></span><span>15–29</span>
+        <span class="dot" style="background:#f80"></span><span>30+</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="mapContainer">
+    <div id="map"></div>
+    <div id="mapOverlay" class="hidden">
+      <span id="mapOverlayMsg"></span>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

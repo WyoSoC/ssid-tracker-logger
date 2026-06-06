@@ -1,0 +1,25 @@
+# Arduino build output
+build/
+*.elf
+*.bin
+*.hex
+*.map
+*.eep
+
+# macOS
+.DS_Store
+**/.DS_Store
+._*
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Node (if web tooling added later)
+node_modules/
+package-lock.json
+
+# Python (Jupyter notebooks in parent folders)
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

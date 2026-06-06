@@ -1,0 +1,279 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Layout ── */
+body {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #111;
+  color: #ccc;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+}
+
+#sidebar {
+  width: 300px;
+  min-width: 260px;
+  background: #161616;
+  border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#mapContainer {
+  flex: 1;
+  position: relative;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Header ── */
+#header {
+  padding: 16px 14px 10px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+h1 {
+  color: #0f0;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  color: #444;
+  font-size: 0.75rem;
+  margin-top: 3px;
+}
+
+/* ── Cards ── */
+.card {
+  padding: 12px 14px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.hidden { display: none !important; }
+
+/* ── Upload ── */
+label {
+  color: #777;
+  font-size: 0.78rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input[type="file"] {
+  color: #0f0;
+  font-family: monospace;
+  font-size: 0.78rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.hint {
+  color: #444;
+  font-size: 0.72rem;
+  margin-top: 6px;
+}
+
+/* ── Stats ── */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #222;
+  font-size: 0.8rem;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-row span:first-child { color: #777; }
+.stat-row span:last-child  { color: #0f0; font-weight: bold; }
+
+/* ── Filter / SSID list ── */
+#filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.section-label {
+  color: #777;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge {
+  background: #222;
+  color: #0af;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.72rem;
+  margin-left: 5px;
+  border: 1px solid #333;
+}
+
+.btn-small {
+  background: transparent;
+  border: 1px solid #333;
+  color: #777;
+  padding: 2px 8px;
+  font-family: monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.btn-small:hover { border-color: #0af; color: #0af; }
+
+input[type="text"] {
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 2px;
+  color: #0f0;
+  padding: 5px 8px;
+  font-family: monospace;
+  font-size: 0.82rem;
+  margin-bottom: 8px;
+  outline: none;
+}
+input[type="text"]:focus { border-color: #0af; }
+
+#ssidList {
+  max-height: 260px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.ssid-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 5px;
+  border-radius: 2px;
+  cursor: pointer;
+  user-select: none;
+}
+.ssid-entry:hover { background: #222; }
+.ssid-entry.active { background: #1a2a1a; border-left: 2px solid #0f0; padding-left: 3px; }
+
+.ssid-name {
+  color: #0af;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  font-size: 0.8rem;
+}
+.ssid-count {
+  color: #444;
+  font-size: 0.72rem;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
+
+/* ── Legend ── */
+.legend-items {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #666;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.4);
+  display: inline-block;
+  margin-left: 6px;
+}
+.dot:first-child { margin-left: 0; }
+
+/* ── Map overlay message ── */
+#mapOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none;
+}
+#mapOverlayMsg {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #0f0;
+  padding: 16px 28px;
+  font-size: 0.9rem;
+  border-radius: 3px;
+}
+
+/* ── Leaflet popup overrides ── */
+.leaflet-popup-content-wrapper {
+  background: #1a1a1a !important;
+  border: 1px solid #444 !important;
+  border-radius: 3px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.6) !important;
+  color: #ccc;
+  font-family: monospace;
+  font-size: 0.8rem;
+  max-width: 300px;
+}
+.leaflet-popup-tip {
+  background: #1a1a1a !important;
+}
+.leaflet-popup-content { margin: 12px 14px !important; }
+
+.popup-time   { color: #0f0; font-weight: bold; margin-bottom: 6px; font-size: 0.82rem; }
+.popup-coords { color: #555; font-size: 0.75rem; margin-bottom: 8px; }
+.popup-ssid-header { color: #0af; margin-bottom: 4px; font-size: 0.78rem; }
+.popup-ssid-list {
+  max-height: 140px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+.popup-ssid {
+  color: #ccc;
+  padding: 1px 0;
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.popup-meta {
+  color: #555;
+  font-size: 0.72rem;
+  margin-top: 8px;
+  border-top: 1px solid #2a2a2a;
+  padding-top: 6px;
+}
+
+/* ── Responsive: stack on small screens ── */
+@media (max-width: 640px) {
+  body { flex-direction: column; }
+  #sidebar {
+    width: 100%;
+    height: 220px;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid #2a2a2a;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 0;
+  }
+  #mapContainer { flex: 1; }
+}
